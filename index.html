@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="assets/style/main.css" />
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Observer.min.js"></script>
 		<script defer src="assets/js/all.js"></script>
+		<script defer src="assets/js/animation.js"></script>
 		<title>wsl-2025</title>
 	</head>
 	<body>
@@ -13,24 +17,74 @@
 				<div class="container">
 					<div class="headerWrap">
 						<a class="logo" href="javascript:;">
-							<img class="logoImg" style="max-width: 350px; width: 100%" src="assets/images/logo-wzl.svg" alt="" />
+							<img class="logoImg" src="assets/images/logo-wzl.svg" alt="WestcomZivo" loading="lazy" />
 						</a>
 						<div class="headerTools">
-							<button class="btn" type="button">Quote</button>
-							<button class="btn" type="button">Menu</button>
+							<button class="btn btn-secondary btn-menu" type="button">Menu</button>
+							<button class="btn btn-primary btn-quote" type="button">
+								<span class="mail">Contact Us</span>Request Quote
+							</button>
 						</div>
 					</div>
 				</div>
 			</header>
 
-			<main class="bg hidden">
-				<!-- <div class="mainInner">
-					<section>1</section>
-					<section>2</section>
-					<section>3</section>
-					<section>4</section>
-					<section>5</section>
-				</div> -->
+			<div class="bg"></div>
+
+			<main class="indexMain">
+				<section class="section-index">
+					<div class="animateArea">
+						<div class="title">
+							<!-- <div class="h2 text-our">OUR</div> -->
+							<div class="mainTitle">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 278">
+									<defs>
+										<style>
+											.cls-1 {
+												fill: #fe822d;
+											}
+											.cls-2 {
+												fill: #1f5eb3;
+											}
+										</style>
+									</defs>
+									<g class="text" id="W">
+										<path
+											class="cls-2"
+											d="M447.15,49.03h-42.86v26.88l-19.76,67.61-20.32-94.49h-51.21l41.75,178.46h47.31l29.22-92.28,27,92.28h39.26l-23.12-83.69-27.27-94.77Z"
+										/>
+									</g>
+									<g class="text" id="O">
+										<path
+											class="cls-2"
+											d="M616.69,49c-49.71,0-90,40.3-90,90s40.3,90,90,90,90-40.3,90-90-40.3-90-90-90ZM616.15,172.54c-18.57,0-33.62-15.05-33.62-33.62s15.05-33.62,33.62-33.62,33.62,15.05,33.62,33.62-15.05,33.62-33.62,33.62Z"
+										/>
+									</g>
+									<g class="text" id="R">
+										<path
+											class="cls-2"
+											d="M864.91,170.95c-1.49-2.22-3.25-4.16-5.29-5.82,10.2-4.99,18.27-12.06,24.2-21.2,5.93-9.15,8.9-19.63,8.9-31.46,0-19.4-5.38-34.83-16.14-46.29-10.74-11.45-26.69-17.18-47.84-17.18h-93.2v126.41l67.05-.02c3.9,0,6.91.69,9.04,2.08,2.13,1.39,3.94,3.74,5.43,7.07l18.92,42.96h54.53l-20.59-46.84c-1.86-4.25-3.53-7.48-5.01-9.7h0ZM834.91,127.42h-47.06v-38.51h29.21c14.84,0,22.26,7.86,22.26,23.56,0,6.19-1.48,11.16-4.41,14.95Z"
+										/>
+									</g>
+									<g class="text" id="K">
+										<path
+											class="cls-2"
+											d="M968.3,49.12h-52.42v178.37h52.42V49.12ZM1026.63,133.7h-53.46l57.86,93.79h55.76s-60.16-93.79-60.16-93.79Z"
+										/>
+									</g>
+									<g class="triangle"><path class="cls-1" d="M538.37,49h-54.33l27.18,32.67,27.15-32.67Z" /></g>
+									<g class="triangle"><path class="cls-1" d="M735.43,227.2h54.31l-27.17-32.67-27.14,32.67Z" /></g>
+									<g class="triangle"><path class="cls-1" d="M1067.77,49h-54.43l27.23,32.65,27.2-32.65Z" /></g>
+								</svg>
+							</div>
+							<!-- <div class="h2 text-speaks">SPEAKS IT ALL</div> -->
+						</div>
+						<div class="typewriter-container">
+							<p class="typewriter first"># Award Winning Creativity</p>
+							<p class="typewriter second"># Results Driven Applications For All Platforms</p>
+						</div>
+					</div>
+				</section>
 			</main>
 		</div>
 	</body>
