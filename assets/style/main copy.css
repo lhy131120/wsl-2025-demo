@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./reset.css";
 @import "./button.css";
-@import "./header.css";
-@import "./footer.css";
 
 :root {
   --blue-100: #30a4dc;
@@ -11,7 +9,7 @@
   --lightblue-100: #f3faff;
   --lightblue-200: #d6e9f8;
   --orange-100: #fe822d;
-  --grey-100: #d7d7d7;
+  --gary-100: #d7d7d7;
   --white: #ffffff;
 }
 
@@ -35,18 +33,7 @@ body.no-scroll {
   overflow: hidden;
 }
 
-img {
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.container {
-  padding: 0 20px;
-  max-width: 1700px;
-  margin: 0 auto;
-}
-
-.headerContainer {
+.loader {
   position: absolute;
   left: 0;
   top: 0;
@@ -55,7 +42,7 @@ img {
   z-index: 2000;
 }
 
-/* .loader {
+.bg {
   position: fixed;
   left: 0;
   top: 50%;
@@ -69,16 +56,106 @@ img {
   animation-fill-mode: forwards
 }
 
-.loader.loaded {
+.bg.loaded {
   z-index: -1;
   opacity: 0;
   visibility: hidden;
-} */
+}
 
+.header {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.1s ease-out, left 0.1s ease-out;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in forwards;
+}
+
+@keyframes bg-animate {
+  0% {
+    width: min(600px, 100%);
+    height: 3px;
+  }
+
+  50% {
+    width: 100%;
+    height: 3px;
+  }
+
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  padding: 0 20px;
+  max-width: 100%;
+}
+
+/* header */
+.header .headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.header .logo {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  transition: max-width .25s ease 0s;
+}
+
+.header .logoImg {
+  max-width: 350px;
+  width: 100%;
+}
+
+.header .headerTools {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.header .headerTools .btn {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  will-change: opacity, transform;
+}
+
+@keyframes headerBtnFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    /* 從上方 20px 處開始 */
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* 移到正常位置 */
+    visibility: visible;
+  }
+}
 
 /* main  */
 
-/* main {
+main {
   background: var(--lightblue-100);
 }
 
@@ -126,17 +203,36 @@ section {
 .animateArea .mainTitle {
   max-width: 100%;
   width: 100%;
-} */
-
-/* Breakpoint Layout */
-@media (max-width: 991.98px) {}
-
-@media (max-width: 767.98px) {
-  .container {
-    padding: 0 15px;
-  }
-
 }
 
+/* Breakpoint Layout */
 
-@media (max-width: 575.98px) {}
+@media (max-width: 768px) {
+  .header .logo {
+    max-width: 200px;
+  }
+
+  .header .headerTools .btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50% !important;
+  }
+
+  .btn-menu::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn-quote {
+    font-size: 0;
+  }
+
+  .btn-quote .mail {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {}

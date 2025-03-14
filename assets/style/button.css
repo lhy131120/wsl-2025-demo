@@ -43,6 +43,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1001;
 }
 
 .btn-quote:is(:hover, .active, :active) {
@@ -74,17 +75,27 @@
   height: 3.5rem;
   padding: 0;
   border-radius: 50%;
+  transition: background-image .5s ease 0s;
+  z-index: 1001;
 }
 
 .btn-menu:before {
   content: '';
-  /* position: absolute; */
   display: block;
   width: 1.5rem;
   height: 1.5rem;
   background-image: url('data:image/svg+xml,<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:%23ffffff;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M2,2.5v3h20v-3H2ZM2,13.5h20v-3H2v3ZM2,21.5h20v-3H2v3Z"/></svg>');
+  background-repeat: no-repeat;
 }
 
-/* .btn-menu:hover:before {
-  background-image: url('data:image/svg+xml,<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:%23003996;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M2,2.5v3h20v-3H2ZM2,13.5h20v-3H2v3ZM2,21.5h20v-3H2v3Z"/></svg>');
-} */
+.btn-menu:is(:hover, .active, :active):before {
+  background-image: url('data:image/svg+xml,<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:%23d6e9f8;fill-rule:evenodd;}</style></defs><path class="cls-1" d="M2,2.5v3h20v-3H2ZM2,13.5h20v-3H2v3ZM2,21.5h20v-3H2v3Z"/></svg>');
+}
+
+.btn-menu.close:before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23ffffff"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>');
+}
+
+.btn-menu.close:is(:hover, .active, :active):before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23d6e9f8"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>');
+}
