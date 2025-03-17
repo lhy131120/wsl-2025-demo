@@ -1,127 +1,243 @@
 document.addEventListener("DOMContentLoaded", () => {
-	// 	const bg = document.querySelector(".bg");
-	// 	const header = document.querySelector(".header");
-	// 	const loader = document.querySelector(".loader");
-	// 	const mainContent = document.querySelector(".indexMain");
-	// 	let isHeaderFixed = false;
+  const header = document.querySelector(".header");
+  const loader = document.querySelector(".loader");
+  const headerContainer = document.querySelector(".headerContainer");
+  const headerContent = document.querySelector(".headerContent");
+  const menuTrigger = document.querySelector(".menuTrigger");
+  const menuOverlay = document.querySelector(".menu-overlay");
+  const menuItems = document.querySelectorAll(".menu-content li");
+  const accordions = document.querySelectorAll(".accordion");
+  let isHeaderFixed = false;
+  let animationFrameId;
+  let isAnimating = false;
 
-	// 	// 禁用滾動
-	// 	document.body.classList.add("no-scroll");
+  // Disable scroll when loader is animating
+  // document.body.classList.add("no-scroll");
 
-	// 	// 設定 header 初始位置
-	// 	function setInitialPosition() {
-	// 		const bgRect = bg.getBoundingClientRect();
-	// 		const loaderRect = loader.getBoundingClientRect();
-	// 		const headerHeight = header.offsetHeight;
+  // set initial position of headerContainer
+  const setInitialPosition = () => {
+    const loaderRect = loader.getBoundingClientRect();
+    const headerRect = document
+      .querySelector(".header")
+      .getBoundingClientRect();
+    const headerHeight = headerContainer.offsetHeight;
+    const relativeTop = loaderRect.top - headerRect.top; // 相對於 .header 的位置
+    headerContainer.style.top = `${relativeTop - headerHeight}px`;
+    // console.log("loaderRect.top:", loaderRect.top, "headerHeight:", headerHeight, "relativeTop:", relativeTop);
+  };
 
-	// 		// 計算 .bg 的頂部位置
-	// 		const bgTop = bgRect.top - loaderRect.top;
-	// 		const initialTop = bgTop - headerHeight - 10;
-	// 		header.style.top = `${Math.max(0, initialTop)}px`; // 確保 top 不小於 0
-	// 		header.style.left = "0px";
-	// 	}
+  if (header) {
+    setTimeout(setInitialPosition, 500);
+  }
 
-	// 	// 初始化位置
-	// 	setInitialPosition();
+  // dynamic update position of headerContainer
+  const updatePosition = () => {
+    const loaderRect = loader.getBoundingClientRect();
+    const headerHeight = headerContainer.offsetHeight;
+    const targetTop = loaderRect.top - headerHeight;
 
-	// 	const animationPromise = new Promise((resolve) => {
-	// 		// 更新 header 位置，實現跟隨和 sticky 效果
-	// 		function updateHeaderPosition() {
-	// 			const bgRect = bg.getBoundingClientRect();
-	// 			const loaderRect = loader.getBoundingClientRect();
-	// 			const headerHeight = header.offsetHeight;
-	// 			const bgTop = bgRect.top - loaderRect.top;
+    // update position of headerContainer
+    headerContainer.style.top = `${targetTop}px`;
 
-	// 			// 計算目標 top 值，不小於 0
-	// 			const targetTop = Math.max(0, bgTop - headerHeight);
+    // if targetTop <= 0, fixed header
+    if (targetTop <= 0 && isAnimating) {
+      cancelAnimationFrame(animationFrameId);
+      headerContainer.style.top = "0px";
+      headerContainer.style.position = "fixed";
+      headerContainer.classList.add("fixed");
+      isAnimating = false;
+    } else if (isAnimating) {
+      animationFrameId = requestAnimationFrame(updatePosition);
+    }
+  };
 
-	// 			header.style.top = `${targetTop}px`;
-	// 			header.style.left = "0px";
+  // Loader Animation Promise
+  const loaderAnimatePromise = new Promise((resolve) => {
+    // loader animation start
+    loader.addEventListener("animationstart", (e) => {
+      if (e.animationName === "loader-animate") {
+        isAnimating = true; // 動畫開始時設置為 true
+        updatePosition();
+      }
+    });
 
-	// 			// 若到達頂部，固定位置
-	// 			if (targetTop <= 0) {
-	// 				header.style.position = "fixed";
-	// 				header.style.top = "0";
-	// 				header.style.left = "0";
-	// 				setTimeout(() => {
-	// 					header.classList.add("fixed");
-	// 					bg.classList.remove("hidden");
-	// 					isHeaderFixed = true;
-	// 					resolve();
-	// 				}, 1000);
-	// 			} else {
-	// 				header.style.position = "absolute";
-	// 				// 繼續監聽動畫
-	// 				requestAnimationFrame(updateHeaderPosition);
-	// 			}
-	// 		}
-	// 		// 開始監聽動畫
-	// 		requestAnimationFrame(updateHeaderPosition);
-	// 	});
+    // loader animation end
+    loader.addEventListener("animationend", (e) => {
+      if (e.animationName === "loader-animate") {
+        cancelAnimationFrame(animationFrameId);
+        headerContainer.style.top = "0px";
+        headerContainer.style.position = "fixed";
+        headerContainer.classList.add("fixed");
+        header.classList.remove("bg-white");
+        isAnimating = false; // 動畫結束時設置為 false
+        isHeaderFixed = true;
 
-	// 	animationPromise
-	// 		.then(() => {
-	// 			if (isHeaderFixed) {
-	// 				document.body.classList.remove("no-scroll"); // 啟用滾動
-	// 				setTimeout(() => {
-	// 					bg.classList.add("loaded");
-	// 					mainContent.classList.add("show"); // show <main>
-	// 				}, 500); // .bg 動畫結束後顯示
-	// 				animation.headerButtonInit();
-	// 				animation.handleAimAnimation();
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error("Error of AnimationPromise:", error);
+        // 顯示 headerContent
+        headerContent.style.opacity = "1";
+        headerContent.style.visibility = "visible";
+        headerContent.style.zIndex = "2";
+        loader.style.zIndex = "-1";
 
+        // 動畫完成，resolve Promise
+        resolve();
+      }
+    });
+  });
 
-	const menuTrigger = document.querySelector(".btn-menu");
-	const menuOverlay = document.querySelector(".menu-overlay");
-	const menuItems = document.querySelectorAll(".menu-content li");
-	let isAnimating = false;
+  // Promise resolve here .....
+  loaderAnimatePromise
+    .then(() => {
+      if (isHeaderFixed) {
+        // document.body.classList.remove("no-scroll");
+        headerButtonsFadeIn();
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 
-	function toggleMenu() {
-		if (isAnimating) return; // 如果動畫正在進行，則不響應
+  // 按鈕 fade-in animation
+  const headerButtonsFadeIn = () => {
+    const btns = document.querySelectorAll(".headerTools button");
+    const animationDuration = 800; // animation duration (ms)
+    const delayBetweenBtns = 200; // each button delay (ms)
+    btns.forEach((btn, index) => {
+      const delay = index * delayBetweenBtns;
+      btn.style.animation = `headerBtnFade ${animationDuration}ms ease-in-out forwards`;
+      btn.style.animationDelay = `${delay}ms`;
+    });
+  };
 
-		isAnimating = true;
-		menuTrigger.style.pointerEvents = "none"; // 禁用點擊
+  const headerContentAnimation = () => {
+    const headerContentInner = document.querySelector(".headerContentInner");
+    const words = document.querySelectorAll(".work-words");
+    const triangles = document.querySelectorAll(".work-triangle");
+  };
 
-		if (menuOverlay.classList.contains("open")) {
-			// 收起菜單
-			menuOverlay.classList.remove("open");
-			// menuTrigger.textContent = "☰";
-			menuTrigger.classList.remove("close");
-			menuTrigger.style.transform = "rotate(0deg)";
-			menuItems.forEach((item) => item.classList.remove("fade-in"));
-			setTimeout(() => {
-				isAnimating = false;
-				menuTrigger.style.pointerEvents = "auto"; // 恢復點擊
-			}, 600); // 動畫結束
-		} else {
-			// 展開菜單
-			menuOverlay.classList.add("open");
-			// menuTrigger.textContent = "×";
-			menuTrigger.classList.add("close");
-			menuTrigger.style.transform = "rotate(90deg)";
+  const checkScrollPosition = () => {
+    // 前設條件：檢查 header 是否有 'fixed' 類別
+    if (headerContainer.classList.contains("fixed")) {
+      const scrollPosition =
+        window.scrollY || document.documentElement.scrollTop; // 獲取當前滾動距離
 
-			// 在展開到50%時（300ms後）開始淡入
-			setTimeout(() => {
-				menuItems.forEach((item, index) => {
-					setTimeout(() => {
-						item.classList.add("fade-in");
-					}, index * 100); // 每個項目間隔100ms淡入
-				});
-			}, 300); // 50%展開時間
+      if (scrollPosition > 250) {
+        headerContainer.classList.add("scrolled"); // 滾動超過 250px，添加 scrolled 類別
+      } else {
+        headerContainer.classList.remove("scrolled"); // 滾動未超過 250px，移除 scrolled 類別
+      }
+    }
+  };
 
-			setTimeout(() => {
-				isAnimating = false;
-				menuTrigger.style.pointerEvents = "auto"; // 恢復點擊
-			}, 600); // 動畫結束
+  window.addEventListener("resize", () => {
+    if (!isHeaderFixed) {
+      if (isAnimating) {
+        updatePosition();
+      } else {
+					if (header) {
+						setInitialPosition();	
+					}
+      }
+    }
+  });
+
+  window.addEventListener("scroll", function () {
+    if (isHeaderFixed) {
+			checkScrollPosition();
 		}
-	}
+  });
 
-	menuTrigger.addEventListener("click", toggleMenu);
+  const toggleMenu = () => {
+    if (isAnimating) return; // if isAnimating is true, disable click event
 
+    isAnimating = true;
+    menuTrigger.style.pointerEvents = "none"; // dis
+
+    if (menuOverlay.classList.contains("open")) {
+      // 收起菜單
+      menuOverlay.classList.remove("open");
+      menuTrigger.classList.remove("close");
+      menuItems.forEach((item) => item.classList.remove("fade-in"));
+      setTimeout(() => {
+        isAnimating = false;
+        menuTrigger.style.pointerEvents = "auto"; // 恢復點擊
+      }, 600); // 動畫結束
+    } else {
+      // 展開菜單
+      menuOverlay.classList.add("open");
+      menuTrigger.classList.add("close");
+
+      // 在展開到50%時（300ms後）開始淡入
+      setTimeout(() => {
+        menuItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add("fade-in");
+          }, index * 100); // 每個項目間隔100ms淡入
+        });
+      }, 300); // 50%展開時間
+
+      setTimeout(() => {
+        isAnimating = false;
+        menuTrigger.style.pointerEvents = "auto"; // 恢復點擊
+      }, 600); // 動畫結束
+    }
+  };
+
+  if (menuTrigger) {
+    menuTrigger.addEventListener("click", toggleMenu);
+  }
+
+  const toggleAccordion = function () {
+    const item = this.parentElement; // current .accordion-item
+    const accordion = item.closest(".accordion"); // get parent .accordion
+    const content = item.querySelector(".accordion-content");
+    const isActive = item.classList.contains("active");
+
+    accordion.querySelectorAll(".accordion-item").forEach((el) => {
+      if (el !== item) {
+        // exclude current item
+        el.classList.remove("active");
+        const otherContent = el.querySelector(".accordion-content");
+        otherContent.style.maxHeight = "0";
+        otherContent.setAttribute("aria-hidden", "true");
+        el.querySelector(".accordion-header").setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    });
+
+    // switch active state
+    if (!isActive) {
+      item.classList.add("active");
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.setAttribute("aria-hidden", "false");
+      this.setAttribute("aria-expanded", "true");
+    } else {
+      item.classList.remove("active");
+      content.style.maxHeight = "0";
+      content.setAttribute("aria-hidden", "true");
+      this.setAttribute("aria-expanded", "false");
+    }
+  };
+
+  if (accordions.length > 0) {
+    accordions.forEach((accordion) => {
+      const accordionHeaders = accordion.querySelectorAll(".accordion-header");
+
+      accordionHeaders.forEach((header) => {
+        // mouse event
+        header.addEventListener("click", toggleAccordion);
+
+        // keyboard event
+        header.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault(); // 防止頁面滾動
+            toggleAccordion.call(this);
+          }
+        });
+      });
+    });
+  }
 });
 
 // 	const animation = {

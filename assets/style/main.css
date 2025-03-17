@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./reset.css";
 @import "./button.css";
+@import "./accordion.css";
 @import "./header.css";
 @import "./footer.css";
+@import "./index.css";
 
 :root {
   --blue-100: #30a4dc;
@@ -40,96 +42,57 @@ img {
   vertical-align: middle;
 }
 
+p {
+  margin: 0 0 1.25rem 0;
+}
+
+section {
+  position: relative;
+}
+
+section.bg-white {
+  background-color: var(--white);
+}
+
+strong {
+  font-weight: 700;
+}
+
 .container {
   padding: 0 20px;
   max-width: 1700px;
   margin: 0 auto;
 }
 
-.headerContainer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2000;
+ul li{
+  position: relative;
+  list-style: none;
+  margin: 0 0 0.75rem 0 ;
+  padding: 0 0 0 30px;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #333333;
 }
 
-/* .loader {
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(530px, 100%);
-  height: 3px;
-  background: var(--lightblue-100);
-  opacity: 0;
-  will-change: transform, height;
-  animation: fadeIn 1.5s ease-in forwards, bg-animate 4s ease forwards 1.5s;
-  animation-fill-mode: forwards
+ul li:not(:last-child) {
+  margin-bottom: 0.75rem;
 }
 
-.loader.loaded {
-  z-index: -1;
-  opacity: 0;
-  visibility: hidden;
-} */
-
-
-/* main  */
-
-/* main {
-  background: var(--lightblue-100);
-}
-
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.indexMain {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.indexMain.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.animateArea {
-  max-width: 1320px;
-  width: 100%;
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
-.animateArea .h2 {
-  position: absolute;
+ul li:before {
+  content: "";
   display: inline-block;
-  color: var(--darkblue-100);
-  font-size: 3.5em;
-  font-weight: 700;
-  font-family: "Roboto Condensed", sans-serif;
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--orange-100);
 }
-
-.animateArea .h2.text-our {
-  transform: translateX(120px);
-}
-
-.animateArea .h2.text-speaks {
-  transform: translateX(380px);
-}
-
-.animateArea .mainTitle {
-  max-width: 100%;
-  width: 100%;
-} */
 
 /* Breakpoint Layout */
-@media (max-width: 991.98px) {}
+@media (max-width: 991.98px) {
+}
 
 @media (max-width: 767.98px) {
   .container {

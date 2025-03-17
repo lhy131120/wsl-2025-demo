@@ -1,0 +1,58 @@
+.accordion {
+  max-width: 100%;
+  margin: 0 auto 1.25rem;
+  padding: 2.5rem 0;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-item:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 45px 25px 45px 40px;
+  cursor: pointer;
+  color: #333;
+}
+
+.accordion-header h3 {
+  font-size: 1.75em;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.accordion-icon {
+  display: block;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23fe822d"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin-left: 20px;
+  transition: transform 0.3s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content-inner {
+  position: relative;
+  padding: 5px 25px 5px 40px;
+  color: #666;
+  font-size: 1.25em;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}

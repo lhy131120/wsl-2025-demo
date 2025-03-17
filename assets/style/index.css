@@ -1,0 +1,52 @@
+/* section Project */
+
+/* About Us */
+
+.about {
+  background-color: var(--lightblue-100);
+}
+
+/* Q&A */
+
+.qna {
+  border-radius: 60px;
+  background-color: #f8f8f8;
+  padding: 100px 0 0 0;
+  bottom: -100px;
+  z-index: 3;
+}
+.qna .h2 {
+  font-size: 62px;
+  color: var(--darkblue-100);
+  font-weight: 700;
+}
+
+.qna .text-special {
+  color: var(--orange-100);
+}
+
+.qna .btn-viewall {
+  justify-self: flex-end;
+  margin-bottom: 100px;
+}
+
+.qna .map-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  top: 100px;
+}
+
+.qna .map-container img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 991.98px) {
+  .qna .btn-viewall {
+    justify-self: flex-start;
+  }
+
+}
