@@ -38,7 +38,9 @@ body.no-scroll {
 }
 
 img {
+  width: 100%;
   max-width: 100%;
+  height: auto;
   vertical-align: middle;
 }
 
@@ -48,10 +50,11 @@ p {
 
 section {
   position: relative;
-}
-
-section.bg-white {
-  background-color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
 }
 
 strong {

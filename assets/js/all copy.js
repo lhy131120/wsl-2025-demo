@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const header = document.querySelector(".header");
 	const loader = document.querySelector(".loader");
-	// const headerContainer = document.querySelector(".headerContainer");
+	const headerContainer = document.querySelector(".headerContainer");
 	const headerContent = document.querySelector(".headerContent");
 	const menuTrigger = document.querySelector(".menuTrigger");
 	const menuOverlay = document.querySelector(".menu-overlay");
@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Disable scroll when loader is animating
 	// document.body.classList.add("no-scroll");
 
-	// set initial position of header
+	// set initial position of headerContainer
 	const setInitialPosition = () => {
 		const loaderRect = loader.getBoundingClientRect();
 		const headerRect = document.querySelector(".header").getBoundingClientRect();
-		const headerHeight = header.offsetHeight;
+		const headerHeight = headerContainer.offsetHeight;
 		const relativeTop = loaderRect.top - headerRect.top; // 相對於 .header 的位置
-		header.style.top = `${relativeTop - headerHeight}px`;
+		headerContainer.style.top = `${relativeTop - headerHeight}px`;
 		// console.log("loaderRect.top:", loaderRect.top, "headerHeight:", headerHeight, "relativeTop:", relativeTop);
 	};
 
@@ -30,21 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
 		setTimeout(setInitialPosition, 500);
 	}
 
-	// dynamic update position of header
+	// dynamic update position of headerContainer
 	const updatePosition = () => {
 		const loaderRect = loader.getBoundingClientRect();
-		const headerHeight = header.offsetHeight;
+		const headerHeight = headerContainer.offsetHeight;
 		const targetTop = loaderRect.top - headerHeight;
 
-		// update position of header
-		header.style.top = `${targetTop}px`;
+		// update position of headerContainer
+		headerContainer.style.top = `${targetTop}px`;
 
 		// if targetTop <= 0, fixed header
 		if (targetTop <= 0 && isAnimating) {
 			cancelAnimationFrame(animationFrameId);
-			header.style.top = "0px";
-			header.style.position = "fixed";
-			header.classList.add("fixed");
+			headerContainer.style.top = "0px";
+			headerContainer.style.position = "fixed";
+			headerContainer.classList.add("fixed");
 			isAnimating = false;
 		} else if (isAnimating) {
 			animationFrameId = requestAnimationFrame(updatePosition);
@@ -65,10 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		loader.addEventListener("animationend", (e) => {
 			if (e.animationName === "loader-animate") {
 				cancelAnimationFrame(animationFrameId);
-				header.style.top = "0px";
-				header.style.position = "fixed";
-				header.classList.add("fixed");
-				// header.classList.remove("bg-white");
+				headerContainer.style.top = "0px";
+				headerContainer.style.position = "fixed";
+				headerContainer.classList.add("fixed");
+				header.classList.remove("bg-white");
 				isAnimating = false; // 動畫結束時設置為 false
 				isHeaderFixed = true;
 
@@ -106,6 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			btn.style.animation = `headerBtnFade ${animationDuration}ms ease-in-out forwards`;
 			btn.style.animationDelay = `${delay}ms`;
 		});
+	};
+
+	const headerContentAnimation = () => {
+		const headerContentInner = document.querySelector(".headerContentInner");
+		const words = document.querySelectorAll(".work-words");
+		const triangles = document.querySelectorAll(".work-triangle");
 	};
 
 	const checkScrollPosition = () => {
@@ -259,3 +265,114 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// if(document.querySelector(".projects")) {
+  
+// 	gsap.set("#txt-projects", { opacity: 0}); 
+// 	gsap.set("#txt-projects-triangle1", { opacity: 0, y: 30 }); 
+// 	gsap.set("#txt-projects-triangle2", { opacity: 0, y: -30 }); 
+// 	gsap.set("#txt-projects-triangle3", { opacity: 0, y: -30 }); 
+// 	const D = 1;
+// 	const tl_txt = gsap.timeline();
+
+// 	tl_txt.to(
+// 		"#txt-projects",
+// 		{
+// 			opacity: 1,
+// 			duration: 3,
+// 		},
+// 		0
+// 	); // Starts at 0s
+
+// 	tl_txt.to(
+// 		"#txt-projects-triangle1",
+// 		{
+// 			opacity: 1,
+// 			y: 0,
+// 			duration: D,
+// 		},
+// 		0.5 * D
+// 	); 
+
+// 	tl_txt.to(
+// 		"#txt-projects-triangle2",
+// 		{
+// 			opacity: 1,
+// 			y: 0,
+// 			duration: D,
+// 		},
+// 		0.9 * D
+// 	); 
+
+// 	tl_txt.to(
+// 		"#txt-projects-triangle3",
+// 		{
+// 			opacity: 1,
+// 			y: 0,
+// 			duration: D,
+// 		},
+// 		1.2 * D
+// 	);
+// }
+
+// 	const animation = {
+// 		headerButtonInit: () => {
+// 			const btns = document.querySelectorAll(".headerTools .btn");
+// 			const animationDuration = 800; // 動畫持續時間（毫秒）
+// 			const delayBetweenBtns = 200; // 每個按鈕之間的延遲（毫秒）
+// 			btns.forEach((btn, index) => {
+// 				const delay = index * delayBetweenBtns;
+// 				btn.style.animation = `headerBtnFade ${animationDuration}ms ease-in-out forwards`;
+// 				btn.style.animationDelay = `${delay}ms`;
+// 			});
+// 		},
+// 		handleAimAnimation: () => {
+// 			const master = gsap.timeline();
+// 			const _tl_mainText = gsap.timeline();
+// 			const _tl_triangle = gsap.timeline();
+// 			// const _sub = gsap.timeline();
+// 			// const _tl_triangle = gsap.timeline();
+// 			// const _typeWriter = gsap.timeline();
+
+// 			master.add(_tl_mainText).add(_tl_triangle);
+
+// 			// const texts = document.querySelectorAll(".mainTitle .text");
+// 			const textElements = gsap.utils.toArray(".mainTitle .text");
+// 			const triangleElements = gsap.utils.toArray(".mainTitle .triangle");
+
+// 			gsap.set(textElements, {
+// 				opacity: 0, // 初始透明度為 0
+// 				x: (index) => {
+// 					// 根據索引設置初始 x 位置
+// 					if (index === 0) return -150; // "W" 向左移動 100 單位
+// 					if (index === 1) return -100; // "O" 向左移動 50 單位
+// 					if (index === 2) return 100; // "R" 向右移動 50 單位
+// 					if (index === 3) return 150; // "K" 向右移動 100 單位
+// 				},
+// 			});
+
+// 			gsap.set(triangleElements, {
+// 				opacity: 0,
+// 				y: (index) => {
+// 					if (index % 2 === 0) return -50;
+// 					if (index % 2 !== 0) return 50;
+// 				},
+// 			});
+
+// 			_tl_mainText.to(textElements, {
+// 				opacity: 1,
+// 				x: 0,
+// 				duration: 2,
+// 				stagger: 0.2, // 每個字母間隔 0.2 秒
+// 				ease: "power2.out",
+// 			});
+
+// 			_tl_triangle.to(triangleElements, {
+// 				opacity: 1,
+// 				y: 0,
+// 				duration: 2,
+// 				stagger: 0.5,
+// 				ease: "power2.out",
+// 			});
+// 		},
+// 	};
+// });

@@ -1,6 +1,8 @@
 .header {
-  position: relative;
-  height: 100vh;
+  /* position: relative; */
+  position: absolute;
+  left: 0;
+  /* height: 100vh; */
   margin: 0;
   background-color: var(--lightblue-100);
   transition: background-color 0.25s ease-in;
@@ -16,8 +18,9 @@
 
 /* header container */
 .headerContainer {
-  position: absolute;
-  left: 0;
+  position: relative;
+  /* position: absolute; */
+  /* left: 0; */
   width: 100%;
   display: flex;
   padding: 15px 20px;
@@ -39,6 +42,7 @@
   will-change: transform, height;
   animation: fadeIn 1.5s ease-in forwards, loader-animate 3s ease forwards 2.5s;
   animation-fill-mode: forwards;
+  z-index: 9999;
 }
 
 @keyframes fadeIn {
@@ -241,6 +245,10 @@
   opacity: 1;
 }
 
+.menu-content li:before {
+  content: none;
+}
+
 .menu-content a {
   position: relative;
   display: inline-block;
@@ -269,46 +277,6 @@
   left: 50%;
   transform: translateX(-50%);
 }
-
-/* ======================================================= */
-
-.headerContentInner {
-  max-width: 70%;
-  width: 100%;
-  padding: 0 20px;
-}
-.fade-word {
-  display: inline-block;
-  font-size: 4em;
-  line-height: 1;
-  font-weight: 700;
-  color: var(--darkblue-200);
-}
-
-.text-work-svg {
-  line-height: 0;
-}
-
-.typeWriter p {
-  font-size: 1.5em;
-  font-weight: 300;
-  line-height: 1.143;
-}
-
-/* .fade-word {
-  font-size: 4.5em;
-  color: var(--darkblue-200);
-  font-weight: 700;
-}
-.text-work-svg {
-  width: ;
-}
-
-.typeWriter p {
-  font-size: 1.5em;
-  line-height: 1.143;
-} */
-
 
 @media (max-width: 1200px) {
   .loader {

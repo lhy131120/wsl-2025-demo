@@ -1,9 +1,15 @@
+/* main */
+.main {
+  height: 100vh;
+  opacity: 0;
+}
+
 /* section Project */
+
 
 /* About Us */
 
 .about {
-  background-color: var(--lightblue-100);
 }
 
 /* Q&A */
@@ -15,10 +21,12 @@
   bottom: -100px;
   z-index: 3;
 }
+
 .qna .h2 {
   font-size: 62px;
   color: var(--darkblue-100);
   font-weight: 700;
+  line-height: 0.875;
 }
 
 .qna .text-special {
@@ -39,7 +47,7 @@
 }
 
 .qna .map-container img {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
