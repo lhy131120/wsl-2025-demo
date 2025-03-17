@@ -1,11 +1,162 @@
 /* main */
 .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  opacity: 0;
+  position: sticky;
+  top: 0;
+  background: var(--lightblue-100);
+  /* opacity: 0; */
+  opacity: 1;
+}
+
+.main .wordContainer {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.main .wordWrap {
+  position: relative;
+  padding: 70px 0;
+}
+
+.main .words {
+  display: flex;
+  column-gap: 25px;
+  justify-content: space-between;
+}
+
+.main .wordWrap .word-w {
+  position: relative;
+  aspect-ratio: 154/150;
+  max-width: 154px;
+}
+.main .wordWrap .word-o {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 150px;
+}
+.main .wordWrap .word-r {
+  position: relative;
+  aspect-ratio: 132 / 150;
+  max-width: 132px;
+}
+.main .wordWrap .word-k {
+  position: relative;
+  aspect-ratio: 152 / 159;
+  max-width: 143px;
+}
+
+.main .wordWrap .word-w:before,
+.main .wordWrap .word-r:before,
+.main .wordWrap .word-k:before {
+  content: "";
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  max-width: 45px;
+  aspect-ratio: 5 / 3;
+  opacity: 1;
+}
+
+.main .wordWrap .word-w:before {
+  background-image: url("/assets/images/home/hd-triangle1.svg");
+  right: -15%;
+}
+
+.main .wordWrap .word-k:before {
+  background-image: url("/assets/images/home/hd-triangle1.svg");
+  right: 19.3%;
+}
+
+.main .wordWrap .word-r:before {
+  background-image: url("/assets/images/home/hd-triangle2.svg");
+  bottom: 0;
+}
+
+.main .word-caption {
+  position: absolute;
+  color: var(--darkblue-200);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 3.625rem;
+}
+
+.main .word-caption.top {
+  top: 0;
+  left: 15%;
+}
+
+.main .word-caption.bottom {
+  bottom: 0;
+  right: 18%;
+}
+
+.main .typewriter {
+  padding: 30px 0 10px;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+.main .typewriter .word {
+  position: relative;
+  font-weight: 300;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: fit-content;
+  /* width: 0; */
+  padding-right: 10px;
+}
+
+.main .typewriter .word.active {
+  animation: typing 3.5s steps(40, end) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.main .typewriter .word::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 3px;
+  right: 0;
+  bottom: 0;
+  background-color: var(--orange-100);
+  animation: blink 0.75s linear infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* section Project */
-
+section.projects {
+  height: 100vh;
+  z-index: 2;
+  background-color: #ffffff;
+  border-radius: 60px;
+}
 
 /* About Us */
 
@@ -56,5 +207,4 @@
   .qna .btn-viewall {
     justify-self: flex-start;
   }
-
 }

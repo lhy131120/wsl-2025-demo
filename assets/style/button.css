@@ -12,7 +12,7 @@
   cursor: pointer;
   font-weight: 700;
   color: var(--darkblue-100);
-  transition: color .25s ease 0s, background-color .25s ease 0s;
+  transition: color .25s ease 0s, background-color .25s ease 0s, width .25s ease 0s, box-shadow .25s ease 0s;
 }
 
 .btn.btn-icon {

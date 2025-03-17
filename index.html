@@ -1,57 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-		<!-- <script defer src="assets/js/all.js"></script> -->
-		<!-- <script defer src="assets/js/animation.js"></script> -->
-		<link rel="stylesheet" href="assets/style/main.css" />
-		<title>wsl-2025</title>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script defer src="assets/js/all.js"></script>
+    <!-- <script defer src="assets/js/animation.js"></script> -->
+    <link rel="stylesheet" href="assets/style/main.css" />
+    <title>wsl-2025</title>
+  </head>
 
-	<style>
-    
-  </style>
+  <style></style>
 
-	<body>
-		<div id="root">
-      <div class="loader"></div>
-			<header class="header">
-				<div class="menu-overlay">
-					<div class="menu-content">
-						<ul>
-							<li><a href="#" class="active">HOME</a></li>
-							<li><a href="#">ABOUT US</a></li>
-							<li><a href="#">OUR WORKS</a></li>
-							<li><a href="#">CONTACT US</a></li>
-							<li><a href="#">FAQ</a></li>
-						</ul>
+  <body>
+    <div id="root">
+      <div class="wrapper">
+        <header class="header">
+          <div class="headerContainer">
+            <div class="logoWrap">
+              <a href="javascript:;" class="logo"
+                ><img src="assets/images/logo-wzl.svg" alt="" loading="lazy"
+              /></a>
+            </div>
+            <div class="headerTools">
+              <button class="menuTrigger" type="button">
+                <span>menu</span>
+              </button>
+              <button
+                class="btn btn-secondary btn-icon btn-quote"
+                type="button"
+              >
+                <span class="icon">viewall</span>Request Quote
+              </button>
+            </div>
+						<div class="loader"></div>
+          </div>
+					<div class="mobileNavWrap">
+						<div class="mobileNav">
+							<div class="mobileMenu">
+								<ul>
+									<li><a href="#" class="active">HOME</a></li>
+									<li><a href="#">ABOUT US</a></li>
+									<li><a href="#">OUR WORKS</a></li>
+									<li><a href="#">CONTACT US</a></li>
+									<li><a href="#">FAQ</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="headerContainer">
-					<a class="headerLogo" href="#">
-						<img src="assets/images/logo-wzl.svg" alt="WestcomZivo" loading="lazy" />
-					</a>
-					<div class="headerTools">
-						<button class="menuTrigger" type="button">
-							<span>menu</span>
-						</button>
-						<button class="btn btn-secondary btn-icon btn-quote" type="button">
-							<span class="icon">viewall</span>Request Quote
-						</button>
-					</div>
-				</div>
-			</header>
-			<main>
-				<section class="main">Main</section>
-				<section class="projects">Projects</section>
-				<section class="about">About</section>
-				<section class="qna">QNA</section>
-			</main>
-			<footer></footer>
-		</div>
-	</body>
-	<script></script>
+        </header>
+      </div>
+      <main>
+        <section class="main">
+						<div class="wordContainer">
+							<div class="wordWrap">
+								<div class="words">
+									<div class="word-w">
+										<img src="assets/images/home/hd-txt-w.svg" alt="">
+									</div>
+									<div class="word-o">
+										<img src="assets/images/home/hd-txt-o.svg" alt="">
+									</div>
+									<div class="word-r">
+										<img src="assets/images/home/hd-txt-r.svg" alt="">
+									</div>
+									<div class="word-k">
+										<img src="assets/images/home/hd-txt-k.svg" alt="">
+									</div>
+								</div>
+								<div class="word-caption top">Our</div>
+								<div class="word-caption bottom">speaks it all</div>
+							</div>
+							<div class="typewriter">
+								<div class="word"># Award Winning Creativity</div>
+								<div class="word"># Results-Driven Applications For All Platforms</div>
+							</div>
+						</div>
+				</section>
+        <section class="projects">
+					<div class="project"></div>
+				</section>
+        <section class="about">About</section>
+        <section class="qna">QNA</section>
+      </main>
+      <footer>footer</footer>
+    </div>
+  </body>
+  <script></script>
 </html>
