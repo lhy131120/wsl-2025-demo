@@ -59,6 +59,7 @@
 
 .header .logoWrap img {
   display: block;
+  width: 100%;
   max-width: 350px;
   transition: all 0.25s ease 0s;
 }

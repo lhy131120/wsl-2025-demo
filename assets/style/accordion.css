@@ -29,15 +29,17 @@
 
 .accordion-icon {
   display: block;
-  flex: 0 0 30px;
-  width: 30px;
-  height: 30px;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23fe822d"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   margin-left: 20px;
-  transition: transform 0.3s ease;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .accordion-content {
@@ -53,6 +55,9 @@
   font-size: 1.25em;
 }
 
-.accordion-item.active .accordion-icon {
+.accordion-item.active .accordion-icon,
+.accordion-item:is(:hover) .accordion-icon {
   transform: rotate(180deg);
+  background-color: var(--orange-100);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23f8f8f8"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>');
 }
